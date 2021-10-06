@@ -5,37 +5,53 @@ import {
     Alert,
     View,
     Linking,
-    AsyncStorage,
+    Dimensions,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Content, Item, Input, Label } from "native-base";
 import { validateUser } from "../database";
 
+const { height } = Dimensions.get("window");
+
 export default class Login extends React.Component {
+    constructor(props) {
+        super(props);
+
+        (async () => {
+            let d = await AsyncStorage.getItem("user");
+            console.log(d);
+            if (d) {
+                d = JSON.parse(d);
+                if (d?.email && d?.username && d?.password) {
+                    props.navigation.replace("Home");
+                }
+            }
+        })();
+    }
     state = {
         Username: "",
         Password: "",
         err: "",
     };
     val = async () => {
-        console.log(
-            await validateUser(
-                this.state.Username.toLowerCase(),
-                this.state.Password
-            )
-        );
+        // console.log(
+        //     await validateUser(
+        //         this.state.Username.toLowerCase(),
+        //         this.state.Password
+        //     )
+        // );
         try {
             let res = await validateUser(
                 this.state.Username.toLowerCase(),
                 this.state.Password
             );
-            console.log(res);
+            //console.log(res);
             if (res.valid) {
-                AsyncStorage.setItem("username", this.state.Username);
+                await AsyncStorage.setItem("user", JSON.stringify(res.details));
                 Alert.alert("Login:", "Login with " + this.state.Username);
                 this.setState({ err: "", Username: "", Password: "" });
-                //this.props.navigation.push("Home");
+                this.props.navigation.push("Home");
             } else {
                 this.setState({ err: res.msg });
             }
@@ -43,7 +59,8 @@ export default class Login extends React.Component {
             console.error(e);
         }
     };
-    validate = () => {
+    validate = async () => {
+        console.log(await AsyncStorage.getItem("user"));
         if (this.state.Username != "" && this.state.Password != "") {
             this.val();
             this.setState({ err: "" });
@@ -51,10 +68,21 @@ export default class Login extends React.Component {
             this.setState({ err: "All Fields Required" });
         }
     };
+
     render() {
         return (
             <Content>
-                <View style={{ flex: 1, paddingTop: 45, alignItems: "center" }}>
+                <View style={styles.header}>
+                    <Text style={styles.headerText}>Welcome to ChatApp</Text>
+                </View>
+                <View
+                    style={{
+                        flex: 1,
+                        paddingTop: 45,
+                        alignItems: "center",
+                        marginTop: height / 20,
+                    }}
+                >
                     <Text style={styles.text}>
                         <Text style={styles.log}>Log</Text>
                         <Text style={styles.in}>IN</Text>
@@ -139,6 +167,16 @@ export default class Login extends React.Component {
     }
 }
 const styles = StyleSheet.create({
+    header: {
+        alignItems: "center",
+    },
+    headerText: {
+        paddingVertical: 10,
+        fontWeight: "bold",
+        fontSize: 30,
+        color: "grey",
+        paddingBottom: 20,
+    },
     text: {
         paddingVertical: 10,
     },

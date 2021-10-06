@@ -16,6 +16,8 @@ if (!firebase.apps.length) {
 }
 const db = firebase.database();
 export default db;
-import Login from "./login";
-const { checkUser, createUser, validateUser } = Login(db);
-export { checkUser, createUser, validateUser };
+import Validate from "./validate";
+import Dashboard from "./dashboard";
+const { checkUser, createUser, validateUser } = Validate(db);
+const { getFriends, addFriends, message } = Dashboard(db);
+export { checkUser, createUser, validateUser, getFriends, addFriends, message };

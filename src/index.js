@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Login from "./Screen/Login";
 import Signup from "./Screen/Signup";
+import Home from "./Screen/Home";
+import Conversations from "./Screen/Conv";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { Container, Header, Body, Text } from "native-base";
 import { StatusBar } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -48,10 +51,18 @@ function createReg() {
 }
 
 export default function Router() {
+    // useEffect(() => {
+    //     AsyncStorage.clear();
+    // }, []);
     return (
         <NavigationContainer theme={MyTheme}>
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Navigator
+                initialRouteName={"Reg"}
+                screenOptions={{ headerShown: false }}
+            >
+                <Stack.Screen name="Home" component={Home} />
                 <Stack.Screen name="Reg" children={createReg} />
+                <Stack.Screen name="Conv" component={Conversations} />
             </Stack.Navigator>
         </NavigationContainer>
     );

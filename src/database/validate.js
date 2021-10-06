@@ -28,6 +28,7 @@ export default (db) => {
     };
     const validateUser = async (username, password) => {
         let valid = false;
+        let details = {};
         let msg = "";
         if (!(await checkUser(username)).valid) {
             await db.ref(`${username}`).once("value", (snap) => {
@@ -35,6 +36,7 @@ export default (db) => {
                     snap.val()?.username == username &&
                     snap.val()?.password == password
                 ) {
+                    details = snap.val();
                     valid = true;
                 } else {
                     msg = "Password is incorrect";
@@ -45,7 +47,7 @@ export default (db) => {
             msg = "User Name is not exists";
         }
 
-        return { valid: valid, msg: msg };
+        return { valid: valid, msg: msg, details: details };
     };
     return { checkUser, createUser, validateUser };
 };
