@@ -60,23 +60,20 @@ const Search = () => {
                     marginTop: 8,
                     marginHorizontal: 25,
                     justifyContent: "center",
-                }}
-            >
+                }}>
                 <Item>
                     <Item
                         floatingLabel
-                        style={{ width: 250, borderBottomColor: "white" }}
-                    >
+                        style={{ width: 250, borderBottomColor: "white" }}>
                         <Icon
-                            name="search"
+                            name='search'
                             style={{ fontSize: 20, color: "#00AAE0" }}
                         />
                         <Label
                             style={{
                                 fontSize: 13,
                                 color: "#00AAE0",
-                            }}
-                        >
+                            }}>
                             Find Friends
                         </Label>
                         <Input
@@ -92,8 +89,7 @@ const Search = () => {
                                 small
                                 danger={errorSearch}
                                 success={successSearch}
-                                onPress={addToFriendList}
-                            >
+                                onPress={addToFriendList}>
                                 {errorSearch ? (
                                     <Icon name={"close"} size={20} />
                                 ) : (
@@ -113,19 +109,17 @@ const HomeHeader = () => {
     return (
         <>
             <Header
-                androidStatusBarColor="#00AAE0"
-                style={{ backgroundColor: "#00AAE0" }}
-            >
+                androidStatusBarColor='#00AAE0'
+                style={{ backgroundColor: "#00AAE0" }}>
                 <Body
                     style={{
                         alignSelf: "center",
                         alignItems: "center",
                         color: "#00AAE0",
-                    }}
-                >
+                    }}>
                     <Title>
                         <Text>Welcome to Chat App</Text>
-                        <Icon name="chatboxes" style={{ color: "white" }} />
+                        <Icon name='chatbox' style={{ color: "white" }} />
                     </Title>
                 </Body>
             </Header>
@@ -182,10 +176,9 @@ const Dashboard = (props) => {
                             height: height / 2.3,
                             backgroundColor: "white",
                             marginTop: height / 10,
-                        }}
-                    >
+                        }}>
                         <ImageBackground
-                            resizeMode="cover"
+                            resizeMode='cover'
                             style={{
                                 flex: 1,
                                 justifyContent: "center",
@@ -199,8 +192,7 @@ const Dashboard = (props) => {
                                 fontSize: 20,
                                 color: "grey",
                                 textAlign: "center",
-                            }}
-                        >
+                            }}>
                             No record found
                         </Text>
                     </View>
@@ -214,8 +206,7 @@ const Dashboard = (props) => {
                                 username: user?.username,
                                 friends: e,
                             });
-                        }}
-                    >
+                        }}>
                         <Card style={{ height: 40 }}>
                             <CardItem>
                                 <Icon
@@ -227,7 +218,7 @@ const Dashboard = (props) => {
                                     {e.replace(/\b\w/g, (l) => l.toUpperCase())}
                                 </Text>
                                 <Right>
-                                    <Icon name="arrow-forward" />
+                                    <Icon name='arrow-forward' />
                                 </Right>
                             </CardItem>
                         </Card>
@@ -243,10 +234,10 @@ const Home = (props) => {
         <Container>
             <HomeHeader />
             <StatusBar
-                backgroundColor="#00AAE0"
+                backgroundColor='#00AAE0'
                 animated={true}
                 networkActivityIndicatorVisible={true}
-                style="light"
+                style='light'
             />
             <Dashboard {...props} />
         </Container>

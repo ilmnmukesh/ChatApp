@@ -27,7 +27,7 @@ const MyTheme = {
 function Top() {
     return (
         <Header style={{ backgroundColor: "#00AAE0" }}>
-            <StatusBar backgroundColor={"#00AAE0"} barStyle="light-content" />
+            <StatusBar backgroundColor={"#00AAE0"} barStyle='light-content' />
             <Body>
                 <Text>Hello</Text>
             </Body>
@@ -38,13 +38,13 @@ function createReg() {
     return (
         <Container>
             {/* <Top /> */}
-            <Tab.Navigator initialRouteName="Login">
+            <Tab.Navigator initialRouteName='Login'>
                 <Tab.Screen
-                    name="Login"
+                    name='Login'
                     component={Login}
                     options={{ tabBarLabel: "Login" }}
                 />
-                <Tab.Screen name="Signup" component={Signup} />
+                <Tab.Screen name='Signup' component={Signup} />
             </Tab.Navigator>
         </Container>
     );
@@ -58,11 +58,10 @@ export default function Router() {
         <NavigationContainer theme={MyTheme}>
             <Stack.Navigator
                 initialRouteName={"Reg"}
-                screenOptions={{ headerShown: false }}
-            >
-                <Stack.Screen name="Home" component={Home} />
-                <Stack.Screen name="Reg" children={createReg} />
-                <Stack.Screen name="Conv" component={Conversations} />
+                screenOptions={{ headerShown: false }}>
+                <Stack.Screen name='Home' component={Home} />
+                <Stack.Screen name='Reg' children={createReg} />
+                <Stack.Screen name='Conv' component={Conversations} />
             </Stack.Navigator>
         </NavigationContainer>
     );

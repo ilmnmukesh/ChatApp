@@ -21,21 +21,18 @@ import { StatusBar } from "expo-status-bar";
 import db, { message } from "../database";
 
 const ConvHeader = (props) => {
-    console.log(props);
     return (
         <>
             <Header
-                androidStatusBarColor="#00AAE0"
-                style={{ backgroundColor: "#00AAE0" }}
-            >
+                androidStatusBarColor='#00AAE0'
+                style={{ backgroundColor: "#00AAE0" }}>
                 <Left>
                     <Button
                         transparent
                         onPress={() => {
                             props.navigation.goBack();
-                        }}
-                    >
-                        <Icon name="arrow-back" />
+                        }}>
+                        <Icon name='arrow-back' />
                     </Button>
                 </Left>
                 <Body
@@ -43,8 +40,7 @@ const ConvHeader = (props) => {
                         alignSelf: "center",
                         alignItems: "center",
                         color: "#00AAE0",
-                    }}
-                >
+                    }}>
                     <Title style={{ fontSize: 25 }}>
                         {props.route.params.friends.replace(/\b\w/g, (l) =>
                             l.toUpperCase()
@@ -66,8 +62,7 @@ const ComLeft = ({ msg }) => {
                         fontSize: 30,
                         backgroundColor: "hsl(194, 100%, 44%)",
                         color: "white",
-                    }}
-                >
+                    }}>
                     {msg}
                 </Text>
             </Card>
@@ -116,14 +111,12 @@ const ConvBody = (props) => {
                 return scrollViewRef.current._root.scrollToEnd({
                     animated: true,
                 });
-            }}
-        >
+            }}>
             <KeyboardAvoidingView
-                behavior="position"
+                behavior='position'
                 enabled
                 style={{ flex: 1 }}
-                keyboardVerticalOffset={-110}
-            >
+                keyboardVerticalOffset={-110}>
                 {data.map((e, i) => {
                     if (e.friend !== friends)
                         return <ComLeft msg={e.msg} key={i} />;
@@ -154,15 +147,14 @@ const ConvFooter = (props) => {
                         width: "100%",
                         backgroundColor: "white",
                         marginVertical: 4,
-                    }}
-                >
+                    }}>
                     <Icon
                         active
-                        name="chatbubbles"
+                        name='chatbubbles'
                         style={{ marginLeft: 20, color: "#00AAE0" }}
                     />
                     <Input
-                        placeholder="Enter message to text....."
+                        placeholder='Enter message to text.....'
                         value={msg}
                         onChangeText={(e) => {
                             setMsg(e);
@@ -171,7 +163,7 @@ const ConvFooter = (props) => {
                     <Button transparent onPress={sendMessage}>
                         <Icon
                             active
-                            name="paper-plane"
+                            name='paper-plane'
                             style={{ marginLeft: 20, color: "#00AAE0" }}
                         />
                     </Button>
@@ -182,15 +174,14 @@ const ConvFooter = (props) => {
 };
 
 const Conversations = (props) => {
-    console.log(props);
     return (
         <>
             <ConvHeader {...props} />
             <StatusBar
-                backgroundColor="#00AAE0"
+                backgroundColor='#00AAE0'
                 animated={true}
                 networkActivityIndicatorVisible={true}
-                style="light"
+                style='light'
             />
             <ConvBody {...props} />
             <ConvFooter {...props} />

@@ -20,7 +20,6 @@ export default class Login extends React.Component {
 
         (async () => {
             let d = await AsyncStorage.getItem("user");
-            console.log(d);
             if (d) {
                 d = JSON.parse(d);
                 if (d?.email && d?.username && d?.password) {
@@ -60,7 +59,6 @@ export default class Login extends React.Component {
         }
     };
     validate = async () => {
-        console.log(await AsyncStorage.getItem("user"));
         if (this.state.Username != "" && this.state.Password != "") {
             this.val();
             this.setState({ err: "" });
@@ -81,8 +79,7 @@ export default class Login extends React.Component {
                         paddingTop: 45,
                         alignItems: "center",
                         marginTop: height / 20,
-                    }}
-                >
+                    }}>
                     <Text style={styles.text}>
                         <Text style={styles.log}>Log</Text>
                         <Text style={styles.in}>IN</Text>
@@ -109,22 +106,20 @@ export default class Login extends React.Component {
 
                     <TouchableOpacity
                         style={{ marginTop: 25 }}
-                        underlayColor="#ddd"
+                        underlayColor='#ddd'
                         onPress={() => {
                             Linking.openURL(
                                 "http://mrcorp.pythonanywhere.com/forgot/"
                             );
-                        }}
-                    >
+                        }}>
                         <Text>Forgot Password?</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.buttonLay}
-                        underlayColor="#fff"
+                        underlayColor='#fff'
                         onPress={() => {
                             this.validate();
-                        }}
-                    >
+                        }}>
                         <Text style={styles.buttonText}>Login</Text>
                     </TouchableOpacity>
                     {/* <Text style={{ marginTop: 20 }}>
@@ -157,8 +152,7 @@ export default class Login extends React.Component {
                         style={{
                             color: "red",
                             marginTop: 15,
-                        }}
-                    >
+                        }}>
                         {this.state.err}
                     </Text>
                 </View>
